@@ -30,6 +30,9 @@ iDESC<-function(mat,meta,subject_var,group_var,zp_group_var,norm_opt=c("SeqDepth
     model_select_diagnosis<-apply(mat,1,function(g){
       zp_diagnosis(g,meta,zp_group_var,zp.thresh)
     })
+  }else{
+    model_select_diagnosis<-rep("Two Pi Model",nrow(mat))
+    names(model_select_diagnosis)<-rownames(mat)
   }
   res_tb<-Reduce(plyr::rbind.fill,lapply(1:nrow(mat),function(g){
     gene<-mat[g,]
