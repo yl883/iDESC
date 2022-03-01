@@ -1,12 +1,19 @@
 Package: iDESC
 Type: Package
-Title: What the Package Does (Title Case)
+Title: iDESC: Identifying differential expression in single-cell RNA sequencing data with multiple subjects
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Yunqing Liu
+Maintainer: Yunqing Liu <yunqing.liu@yale.edu>
+Description: Single cell RNA-seq differential expression analysis considering subject effect with zero-inflated negative binomial mixed model.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
+Roxygen: list(markdown = TRUE)
+Imports: 
+    glmmTMB,
+    boot,
+    plyr,
+    stats
+Depends: 
+    R (>= 2.10)
