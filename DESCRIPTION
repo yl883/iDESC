@@ -14,6 +14,8 @@ Imports:
     glmmTMB,
     boot,
     plyr,
+    Matrix,
+    Seurat,
     stats
 Depends: 
-    R (>= 2.10)
+    R (>= 3.50)

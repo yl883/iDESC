@@ -29,7 +29,10 @@ normalization_factors<-function(mat,norm_opt,user_sf){
     })
     rm(GEOmean_cell)
   }else if(norm_opt=="User"&(!is.null(user_sf))){
-    stopifnot("User-specific normalization cannot be applied to all cells"=ncol(mat)==length(user_sf))
+    if(ncol(mat)!=length(user_sf)){
+      print("User-specific normalization cannot be applied to all cells due to data filtering")
+      user_sf<-user_sf[colnames(mat)]
+    }
     sf=user_sf
   }else if(norm_opt=="None"){sf<-rep(1,ncol(mat))}
   return(sf)

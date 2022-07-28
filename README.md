@@ -29,7 +29,7 @@ library(iDESC)
 data(IPF_example)
 mat=IPF_example$mat
 meta=IPF_example$meta
+sequencing_depth=IPF_example$meta$sequencing_depth
 str(meta)
-result=iDESC(mat,meta,subject_var="subject",group_var="disease",
-             zp_group_var="disease",norm_opt="None",diagnosis = T)
+result=iDESC(mat,meta,subject_var="subject",group_var="disease",norm_opt="User",user_sf = sequencing_depth,span = 0.7)
 ```

@@ -1,18 +1,19 @@
 #' preprocessing: filtering step on genes/cells
 #'
-#' @param mat Count matrix
+#' @param mat  Count matrix
 #' @param meta Data frame including information for cells
 #' @param subject_var The name of subject information in meta
 #' @param group_var The name of group/disease information for DE analysis in meta
 #' @param sub_cell_filtering Filtering on cells within each subject
 #' @param gene_sub_filtering Filtering on genes based on expression in each subject
 #' @param gene_cell_filtering Filtering on genes based on expression across all cells
+#' @param ncell_filtering Filtering on cells based on the number of genes expressed
 #'
 #' @return A list of processed count matrix and data frame
 #' @export
 #'
 #' @examples
-preprocessing<-function(mat,meta,subject_var,group_var,sub_cell_filtering,gene_sub_filtering,gene_cell_filtering){
+preprocessing<-function(mat,meta,subject_var,group_var,sub_cell_filtering,gene_sub_filtering,gene_cell_filtering,ncell_filtering){
   #meta is a df with rownames=cell_barcode, columns includes:subject,group
   #sub_cell_filtering is an integer
   stopifnot("Gene filtering should be based on an indicated proportion"=(gene_sub_filtering>=0&gene_sub_filtering<=1))
@@ -25,7 +26,9 @@ preprocessing<-function(mat,meta,subject_var,group_var,sub_cell_filtering,gene_s
   barcode_orig<-rownames(meta)
   subject_name<-names(table(meta[,subject_var]))
   remain_sub<-subject_name[which(table(meta[,subject_var])>=sub_cell_filtering)]
-  remain_cell<-barcode_orig[which(meta[,subject_var]%in%remain_sub)]
+  sub_cell<-barcode_orig[which(meta[,subject_var]%in%remain_sub)]
+  expressed_cell<-barcode_orig[which(Matrix::colSums(mat!=0)>0)]
+  remain_cell<-intersect(sub_cell,expressed_cell)
   meta<-meta[remain_cell,]
 
   #Keep genes expressed at least a% cells in b% subject in either group
