@@ -11,7 +11,8 @@ preprocessing(
   group_var,
   sub_cell_filtering,
   gene_sub_filtering,
-  gene_cell_filtering
+  gene_cell_filtering,
+  ncell_filtering
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ preprocessing(
 \item{gene_sub_filtering}{Filtering on genes based on expression in each subject}
 
 \item{gene_cell_filtering}{Filtering on genes based on expression across all cells}
+
+\item{ncell_filtering}{Filtering on cells based on the number of genes expressed}
 }
 \value{
 A list of processed count matrix and data frame

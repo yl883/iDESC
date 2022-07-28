@@ -9,14 +9,13 @@ iDESC(
   meta,
   subject_var,
   group_var,
-  zp_group_var,
   norm_opt = c("SeqDepth", "SizeFactor", "User", "None"),
   user_sf = NULL,
   sub_cell_filtering = 5,
-  gene_sub_filtering = 1,
+  gene_sub_filtering = 0,
   gene_cell_filtering = 0.05,
-  zp.thresh = 0.05,
-  diagnosis = F
+  ncell_filtering = 1,
+  span = 0.05
 )
 }
 \arguments{
@@ -28,8 +27,6 @@ iDESC(
 
 \item{group_var}{The name of group/disease information for DE analysis in meta}
 
-\item{zp_group_var}{The name of group/disease information for differences of inflated zeros in meta}
-
 \item{norm_opt}{Option for normalizing factors}
 
 \item{user_sf}{Option for user-specific normalizing factors}
@@ -40,13 +37,22 @@ iDESC(
 
 \item{gene_cell_filtering}{Filtering on genes based on expression across all cells}
 
-\item{zp.thresh}{Threshold of zero proportions}
+\item{ncell_filtering}{Filtering on cells based on the number of genes expressed}
 
-\item{diagnosis}{Option for doing diagnosis on zero proportions}
+\item{span}{smoothing parameter for LOESS curve}
 }
 \value{
 A result table contains parameter estimation
 }
 \description{
 iDESC: main function for DE analysis using zero-inflated negative binomial mixed model
+}
+\examples{
+
+library(iDESC)
+data(IPF_example)
+mat=IPF_example$mat
+meta=IPF_example$meta
+sequencing_depth=IPF_example$meta$sequencing_depth
+result=iDESC(mat,meta,subject_var="subject",group_var="disease",norm_opt="User",user_sf = sequencing_depth,span = 0.7)
 }

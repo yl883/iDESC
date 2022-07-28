@@ -31,5 +31,6 @@ mat=IPF_example$mat
 meta=IPF_example$meta
 sequencing_depth=IPF_example$meta$sequencing_depth
 str(meta)
-result=iDESC(mat,meta,subject_var="subject",group_var="disease",norm_opt="User",user_sf = sequencing_depth,span = 0.7)
+result=iDESC(mat,meta,subject_var="subject",group_var="disease",
+             norm_opt="User",user_sf = sequencing_depth,span = 0.7)
 ```

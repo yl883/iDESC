@@ -16,6 +16,13 @@
 #' @export
 #'
 #' @examples
+#'
+#' library(iDESC)
+#' data(IPF_example)
+#' mat=IPF_example$mat
+#' meta=IPF_example$meta
+#' sequencing_depth=IPF_example$meta$sequencing_depth
+#' result=iDESC(mat,meta,subject_var="subject",group_var="disease",norm_opt="User",user_sf = sequencing_depth,span = 0.7)
 iDESC<-function(mat,meta,subject_var,group_var,norm_opt=c("SeqDepth","SizeFactor","User","None"),user_sf=NULL,
                 sub_cell_filtering=5,gene_sub_filtering=0,gene_cell_filtering=0.05,ncell_filtering=1,span=0.05){
   if(!is.null(user_sf)){

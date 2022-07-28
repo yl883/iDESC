@@ -16,6 +16,7 @@ Imports:
     plyr,
     Matrix,
     Seurat,
-    stats
+    stats,
+    graphics
 Depends: 
     R (>= 3.50)

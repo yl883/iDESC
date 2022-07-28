@@ -31,7 +31,7 @@ zp_prediction<-function(mat,norm_factor,span){
   smoothed05 <- stats::predict(loessMod05)
   names(smoothed05)<-gl
   plot(zp~log_mu,data=zp_plot,ylab="Proportion of zeros",xlab="log(avg.norm.expression)",main=paste0("span=",span),cex=0.3)
-  lines(smoothed05[order(zp_plot$log_mu)], x=zp_plot$log_mu[order(zp_plot$log_mu)], col="red")
+  graphics::lines(smoothed05[order(zp_plot$log_mu)], x=zp_plot$log_mu[order(zp_plot$log_mu)], col="red")
 
   return(smoothed05)
 }
