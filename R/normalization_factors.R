@@ -6,8 +6,7 @@
 #'
 #' @return A vector of normalizing factors
 #' @export
-#'
-#' @examples
+
 normalization_factors<-function(mat,norm_opt,user_sf){
   mat<-as.matrix(mat)
   if(norm_opt!="User"&(!is.null(user_sf))){

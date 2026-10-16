@@ -12,7 +12,8 @@ preprocessing(
   sub_cell_filtering,
   gene_sub_filtering,
   gene_cell_filtering,
-  ncell_filtering
+  ncell_filtering,
+  cores = 1
 )
 }
 \arguments{
@@ -26,14 +27,19 @@ preprocessing(
 
 \item{sub_cell_filtering}{Filtering on cells within each subject}
 
-\item{gene_sub_filtering}{Filtering on genes based on expression in each subject}
+\item{gene_sub_filtering}{Filtering on genes based on expression in each subject: a gene is kept
+if, in at least one group, it is expressed in at least \code{gene_cell_filtering} of the cells in at
+least \code{gene_sub_filtering} x (number of subjects of that group) subjects. With 0 every gene is kept.}
 
-\item{gene_cell_filtering}{Filtering on genes based on expression across all cells}
+\item{gene_cell_filtering}{Minimum proportion of cells of a subject expressing the gene (used
+together with \code{gene_sub_filtering})}
 
 \item{ncell_filtering}{Filtering on cells based on the number of genes expressed}
+
+\item{cores}{Number of cores for parallel processing (default is 1)}
 }
 \value{
-A list of processed count matrix and data frame
+A list with the processed count matrix (\code{mat}) and the matching data frame of cells (\code{meta})
 }
 \description{
 preprocessing: filtering step on genes/cells
